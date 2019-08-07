@@ -1,5 +1,6 @@
 // Arreglo que contiene las intrucciones del juego 
-var instrucciones = [];
+var instrucciones = ["Utilizar las flechas para mover las piezas", 
+"Ordenar las piezas hasta alcanzar la imagen objetivo"];
 // Arreglo para ir guardando los movimientos que se vayan realizando
 var movimientos = [];
 
@@ -21,17 +22,29 @@ Cada elemento de este arreglo deberá ser mostrado en la lista con id 'lista-ins
 Para eso deberás usar la función ya implementada mostrarInstruccionEnLista().
 Podés ver su implementación en la ultima parte de este codigo. */
 function mostrarInstrucciones(instrucciones) {
-    //COMPLETAR
+  for(var i=0;i<instrucciones.length[i];i++){
+  }
+  mostrarInstruccionEnLista(instrucciones,"lista-instrucciones");
 }
+
 
 /* COMPLETAR: Crear función que agregue la última dirección al arreglo de movimientos
 y utilice actualizarUltimoMovimiento para mostrarlo en pantalla */
+//se que tengo que pushear los movimientos del usuario al arreglo "movimientos" pero no se cómo empezar
+function agregarUltimoMovimiento(direccion){
+  movimientos.push(direccion);
+  actualizarUltimoMovimiento(direccion);
+}
+
 
 /* Esta función va a chequear si el Rompecabezas esta en la posicion ganadora. 
 Existen diferentes formas de hacer este chequeo a partir de la grilla. */
-function chequearSiGano() {
-    //COMPLETAR
-}
+// function chequearSiGano() {
+//   for (var i = 0; i < grilla.length; i++) {
+//     for (var j = 0; j < grilla.length; j++) {
+//       }
+//     }
+// }
 
 // Implementar alguna forma de mostrar un cartel que avise que ganaste el juego
 function mostrarCartelGanador() {
@@ -99,8 +112,9 @@ function moverEnDireccion(direccion) {
         intercambiarPosiciones(filaVacia, columnaVacia, nuevaFilaPiezaVacia, nuevaColumnaPiezaVacia);
         actualizarPosicionVacia(nuevaFilaPiezaVacia, nuevaColumnaPiezaVacia);
 
-  //COMPLETAR: Agregar la dirección del movimiento al arreglo de movimientos
-
+      agregarUltimoMovimiento(direccion);
+  
+    
     }
 }
 

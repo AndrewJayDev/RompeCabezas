@@ -30,7 +30,7 @@ li::before {
   vertical-align: top;
 }
 .col-40 {
-  background: #FFF;
+  background: #f0efea;
   padding: 30px;
   color: #000;
 }
@@ -47,8 +47,14 @@ li::before {
 .texto-centrado {
   text-align: center;
 }
+#imagenFinal{
+  width:80%;
+}
 
 #juego div {
+  display:flex;
+  flex-direction: row;
+  flex-wrap:wrap;
   text-align: center;
   animation: fadein 2s;
 }
@@ -56,4 +62,19 @@ li::before {
 @keyframes fadein {
   from { opacity: 0; }
   to   { opacity: 1; }
+}
+
+#juego{
+  display:flex;
+  flex-direction:row;
+  flex-wrap:wrap;
+  width: 100%;
+}
+.piezasDelJuego{
+  width:33%;
+}
+
+#footer{
+  width:100%;
+  background-color:#f7e0e7;
 }
