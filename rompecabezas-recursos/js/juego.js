@@ -11,6 +11,12 @@ var grilla = [
     [4, 5, 6],
     [7, 8, 9]
 ];
+//grilla ganadora
+var grillaGanadora=[
+    [1, 2, 3],
+    [4, 5, 6],
+    [7, 8, 9]
+];
 
 /* Estas dos variables son para guardar la posición de la pieza vacía. 
 Esta posición comienza siendo la [2, 2]*/
@@ -39,12 +45,57 @@ function agregarUltimoMovimiento(direccion){
 
 /* Esta función va a chequear si el Rompecabezas esta en la posicion ganadora. 
 Existen diferentes formas de hacer este chequeo a partir de la grilla. */
-// function chequearSiGano() {
-//   for (var i = 0; i < grilla.length; i++) {
-//     for (var j = 0; j < grilla.length; j++) {
-//       }
-//     }
-// }
+// fuente: https://www.geeksforgeeks.org/how-to-compare-two-arrays-in-javascript/
+function chequearSiGano(grilla,grillaGanadora){
+if(JSON.stringify(grilla)==JSON.stringify(grillaGanadora)){
+  return true;
+}else{
+  console.log(grilla);
+  console.log(grillaGanadora);
+  return false;
+}
+}
+//////*second attempt*/////
+  // function correrGrilla(grilla1){
+  //   for (var i = 0; i < grilla1.length; i++) {
+  //     for (var j = 0; j < grilla1.length; j++) {
+  //       }
+  //     }
+  // }
+  // function chequearSiGano(grilla,grillaGanadora){
+  //   correrGrilla(grilla);
+  //   correrGrilla(grillaGanadora);
+  //   if(grilla===grillaGanadora){
+  //     return true;
+  //   }else{
+  //     return false;
+  //   }
+  // }
+/////*first attempt/////
+  //función para recorrer una grilla y juntarla en un array
+  // function mergeGrilla(grilla1,grilla2){
+  //   for (var i = 0; i < grilla1.length; i++) {
+  //     for (var j = 0; j < grilla1.length; j++) {
+  //       grilla2.push(grilla1[i][j])
+  //       }
+  //     }
+  // }
+
+  // function chequearSiGano(grilla) {
+  //   var grillaMerge=[];
+  //   var grillaGanadoraMerge=[];
+  //   mergeGrilla(grilla,grillaMerge);
+  //   mergeGrilla(grillaGanadora,grillaGanadoraMerge);
+  //   if(grillaMerge==grillaGanadoraMerge){
+  //     return true;
+  //   }else if(grillaMerge!==grillaGanadoraMerge){
+  //     console.log(grillaMerge);
+  //     console.log(grillaGanadoraMerge);
+  //     return false;
+  //   }else{
+  //     console.log("error de chequearSiGano");
+  //   }
+  // }
 
 // Implementar alguna forma de mostrar un cartel que avise que ganaste el juego
 function mostrarCartelGanador() {
