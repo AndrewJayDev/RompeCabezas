@@ -11,7 +11,7 @@ var grilla = [
     [4, 5, 6],
     [7, 8, 9]
 ];
-//grilla ganadora
+//grilla ganadora para luego ser comparado con grilla[]
 var grillaGanadora=[
     [1, 2, 3],
     [4, 5, 6],
