@@ -30,7 +30,7 @@ Podés ver su implementación en la ultima parte de este codigo. */
 function mostrarInstrucciones(instrucciones) {
   for(var i=0;i<instrucciones.length[i];i++){
   }
-  mostrarInstruccionEnLista(instrucciones,"lista-instrucciones");
+  mostrarInstruccionEnLista(instrucciones[i],"instrucciones");
 }
 
 
@@ -46,8 +46,9 @@ function agregarUltimoMovimiento(direccion){
 /* Esta función va a chequear si el Rompecabezas esta en la posicion ganadora. 
 Existen diferentes formas de hacer este chequeo a partir de la grilla. */
 // fuente: https://www.geeksforgeeks.org/how-to-compare-two-arrays-in-javascript/
+
 function chequearSiGano(grilla,grillaGanadora){
-if(JSON.stringify(grilla)==JSON.stringify(grillaGanadora)){
+if(JSON.stringify(grilla)===JSON.stringify(grillaGanadora)){
   return true;
 }else{
   console.log(grilla);
@@ -55,51 +56,14 @@ if(JSON.stringify(grilla)==JSON.stringify(grillaGanadora)){
   return false;
 }
 }
-//////*second attempt*/////
-  // function correrGrilla(grilla1){
-  //   for (var i = 0; i < grilla1.length; i++) {
-  //     for (var j = 0; j < grilla1.length; j++) {
-  //       }
-  //     }
-  // }
-  // function chequearSiGano(grilla,grillaGanadora){
-  //   correrGrilla(grilla);
-  //   correrGrilla(grillaGanadora);
-  //   if(grilla===grillaGanadora){
-  //     return true;
-  //   }else{
-  //     return false;
-  //   }
-  // }
-/////*first attempt/////
-  //función para recorrer una grilla y juntarla en un array
-  // function mergeGrilla(grilla1,grilla2){
-  //   for (var i = 0; i < grilla1.length; i++) {
-  //     for (var j = 0; j < grilla1.length; j++) {
-  //       grilla2.push(grilla1[i][j])
-  //       }
-  //     }
-  // }
-
-  // function chequearSiGano(grilla) {
-  //   var grillaMerge=[];
-  //   var grillaGanadoraMerge=[];
-  //   mergeGrilla(grilla,grillaMerge);
-  //   mergeGrilla(grillaGanadora,grillaGanadoraMerge);
-  //   if(grillaMerge==grillaGanadoraMerge){
-  //     return true;
-  //   }else if(grillaMerge!==grillaGanadoraMerge){
-  //     console.log(grillaMerge);
-  //     console.log(grillaGanadoraMerge);
-  //     return false;
-  //   }else{
-  //     console.log("error de chequearSiGano");
-  //   }
-  // }
 
 // Implementar alguna forma de mostrar un cartel que avise que ganaste el juego
 function mostrarCartelGanador() {
-    //COMPLETAR
+    if(chequearSiGano(grilla,grillaGanadora)===true){
+      alertGanar();
+    }else{
+    return false
+    } 
 }
 
 /* Función que intercambia dos posiciones en la grilla.
@@ -113,18 +77,28 @@ En vez de intercambiar esos valores vamos a terminar teniendo en ambas posicione
 Se te ocurre cómo solucionar esto con una variable temporal?
 */
 function intercambiarPosicionesGrilla(filaPos1, columnaPos1, filaPos2, columnaPos2) {
-    //COMPLETAR
+  var temp1 = grilla[filaPos1][columnaPos1];
+  var temp2 = grilla[filaPos2][columnaPos2];
+
+  grilla[filaPos1][columnaPos1] = temp2;
+  grilla[filaPos2][columnaPos2] = temp1;
 }
 
 // Actualiza la posición de la pieza vacía
 function actualizarPosicionVacia(nuevaFila, nuevaColumna) {
-    //COMPLETAR
+  filaVacia = nuevaFila;
+  columnaVacia = nuevaColumna;
 }
 
 
 // Para chequear si la posicón está dentro de la grilla.
+
 function posicionValida(fila, columna) {
-    //COMPLETAR
+    if(fila>=0 && fila<=2 && columna>=0 && columna<=2){
+      return true;
+    }else{
+      return false;
+    }
 }
 
 /* Movimiento de fichas, en este caso la que se mueve es la blanca intercambiando su posición con otro elemento.
@@ -135,24 +109,26 @@ function moverEnDireccion(direccion) {
 
   // Mueve pieza hacia la abajo, reemplazandola con la blanca
   if (direccion === codigosDireccion.ABAJO) {
-    nuevaFilaPiezaVacia = filaVacia - 1;
+    nuevaFilaPiezaVacia = filaVacia + 1;
     nuevaColumnaPiezaVacia = columnaVacia;
   }
     
   // Mueve pieza hacia arriba, reemplazandola con la blanca
   else if (direccion === codigosDireccion.ARRIBA) {
-    nuevaFilaPiezaVacia = filaVacia + 1;
+    nuevaFilaPiezaVacia = filaVacia - 1;
     nuevaColumnaPiezaVacia = columnaVacia;
   }
     
   // Mueve pieza hacia la derecha, reemplazandola con la blanca
   else if (direccion === codigosDireccion.DERECHA) {
-    //COMPLETAR
+    nuevaFilaPiezaVacia = filaVacia;
+    nuevaColumnaPiezaVacia = columnaVacia+1;
   }
     
   // Mueve pieza hacia la izquierda, reemplazandola con la blanca
   else if (direccion === codigosDireccion.IZQUIERDA) {
-    // COMPLETAR
+    nuevaFilaPiezaVacia = filaVacia;
+    nuevaColumnaPiezaVacia = columnaVacia-1;
   }
 
   /* A continuación se chequea si la nueva posición es válida, si lo es, se intercambia. 
@@ -164,12 +140,13 @@ function moverEnDireccion(direccion) {
         actualizarPosicionVacia(nuevaFilaPiezaVacia, nuevaColumnaPiezaVacia);
 
       agregarUltimoMovimiento(direccion);
-  
-    
     }
 }
 
-
+//Alerts
+function alertGanar(){
+  alert("¡felicitaciones!");
+}  
 //////////////////////////////////////////////////////////
 ////////A CONTINUACIÓN FUNCIONES YA IMPLEMENTADAS.////////
 /////////NO TOCAR A MENOS QUE SEPAS LO QUE HACES//////////
@@ -258,7 +235,7 @@ se mezclará todo el tablero. */
 
 function mezclarPiezas(veces) {
   if (veces <= 0) {
-    return;
+    return true;
   }
   
   var direcciones = [codigosDireccion.ABAJO, codigosDireccion.ARRIBA,
@@ -301,11 +278,16 @@ function capturarTeclas() {
 /* Se inicia el rompecabezas mezclando las piezas 60 veces 
 y ejecutando la función para que se capturen las teclas que 
 presiona el usuario */
-function iniciar() {
+
+var button = document.getElementById("button");
+
+button.onclick = iniciar() {
     mostrarInstrucciones(instrucciones);
     mezclarPiezas(30);
     capturarTeclas();
 }
 
 // Ejecutamos la función iniciar
+
 iniciar();
+
