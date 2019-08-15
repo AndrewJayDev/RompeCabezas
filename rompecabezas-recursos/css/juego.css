@@ -1,20 +1,21 @@
 body {
   font-family: 'Share Tech', sans-serif;
-  font-size:12px;
-  width: 940px;
-  margin: 5% auto;
-  min-height: 100%;
+  font-size:10px;
+  width: 800px;
+  margin: 2% auto;
+  min-height:100%;
   background-image: url(../images/adventure.jpg);
+  border:2px solid #E84A5F;
+  box-sizing:border-box;
 }
 
 ul {
   padding-left: 0;
-  margin:0;
+  list-style;none;
 }
 li {
-  padding: 5px 0;
   animation: fadein 5s;
-  list-style-type: none;
+  padding: 5px 0;
 }
 li::before {
   content: "• ";
@@ -27,7 +28,7 @@ li::before {
 }
 
 .col-40 #instrucciones {
-  font-size: 1rem;
+  font-size: .8rem;
   color: #E84A5F;
 }
 
@@ -37,25 +38,47 @@ li::before {
   vertical-align: top;
 }
 .col-40 {
+  width:200px;
   background: #f0efea;
-  padding: 30px;
+  padding-left: 8px;
+  padding-right: 8px;
   color: #000;
+  box-sizing:border-box;
+}
+
+.col-40 div { 
+  padding-top:5px;
+  padding-bottom:5px;
+}
+
+h2{
+  font-size: 1rem;
+  color: #E84A5F;
+}
+
+p{
+  font-size:1rem;
+  color: #E84A5F;
 }
 
 .col-60 {
+  width:600px;
   background: #E84A5F;
+  border-left: 2px solid #E84A5F;
 
 }
 
 #flecha{
-  font-size: 60px;
+  font-size: 3rem;
 }
 
 .texto-centrado {
   text-align: center;
 }
 #imagenFinal{
-  width:80%;
+  width:50%;
+  border: 2px solid #E84A5F;
+  box-sizing: border-box;
 }
 
 #juego div {
@@ -64,6 +87,7 @@ li::before {
   flex-wrap:wrap;
   text-align: center;
   animation: fadein 2s;
+  border: solid 1px #E84A5F;
 }
 
 @keyframes fadein {
@@ -71,13 +95,46 @@ li::before {
   to   { opacity: 1; }
 }
 
-  .button {
+#juego{
+  width:600px;
+  height: 600px;
+  display:flex;
+  flex-wrap: wrap;
+  justify-content:center;
+  align-items: stretch;
+  align-content: center;
+}
+
+.piezas{
+  width:33%;
+  height:33%;
+  text-align: center;
+  animation: fadein 2s;
+}
+
+.piezas img{
+  width:100%;
+}
+
+#instrucciones-text{
+  width:100%;
+  margin:auto;
+}
+
+#lista-instrucciones{
+  width:100%;
+  margin:auto;
+  padding:5px;
+}
+
+.button {
   display: flex;
   justify-content: center;
   backface-visibility: hidden;
-  width:25%;
+  width:50%;
   margin-left:15%;
   margin-top:1em;
+  margin-bottom:1em;
   position: relative;
   cursor: pointer;
   white-space: nowrap;
@@ -91,8 +148,9 @@ li::before {
   font-size: 16px;
   font-family: Helvetica Neue;
   font-weight: 900;
-  font-style: normal
+  font-style: normal;
   }
+
   .button > div {
   display: flex;
   justify-content: space-around;
@@ -115,18 +173,26 @@ li::before {
   padding: 0px 0px 0px 0px;
   margin: 0px 0px 0px 0px;
   }
-
-#juego{
-  display:flex;
-  flex-direction:row;
-  flex-wrap:wrap;
-  width: 100%;
+strong{
+  font-weight: 700;
 }
-.piezasDelJuego{
-  width:33%;
+#ultimo-mov{
+  min-height:6rem;
+  margin:auto;
 }
 
 #footer{
+  display:flex;
+  flex-wrap: wrap;
+  justify-content: center;
   width:100%;
-  background-color:#f7e0e7;
+  background-color:#f0efea;
+  border-top: solid 2px #EC6778;
+  margin-top:1rem;
 }
+
+/* extra-small screens */
+@media only screen and (max-width: 565px){
+
+}
+

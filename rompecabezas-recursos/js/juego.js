@@ -28,9 +28,9 @@ Cada elemento de este arreglo deberá ser mostrado en la lista con id 'lista-ins
 Para eso deberás usar la función ya implementada mostrarInstruccionEnLista().
 Podés ver su implementación en la ultima parte de este codigo. */
 function mostrarInstrucciones(instrucciones) {
-  for(var i=0;i<instrucciones.length[i];i++){
+  for (i=0; i < instrucciones.length; i++){
+    mostrarInstruccionEnLista(instrucciones[i],"lista-instrucciones") ;
   }
-  mostrarInstruccionEnLista(instrucciones[i],"instrucciones");
 }
 
 
@@ -41,21 +41,28 @@ function agregarUltimoMovimiento(direccion){
   movimientos.push(direccion);
   actualizarUltimoMovimiento(direccion);
 }
+//funcion agregado para que no se muestruen las flechas mientras mezclan las imagenes
+function agregarUltimoMovimiento2(direccion){
+  movimientos.push(direccion);
+}
+
 
 
 /* Esta función va a chequear si el Rompecabezas esta en la posicion ganadora. 
 Existen diferentes formas de hacer este chequeo a partir de la grilla. */
 // fuente: https://www.geeksforgeeks.org/how-to-compare-two-arrays-in-javascript/
-
 function chequearSiGano(grilla,grillaGanadora){
-if(JSON.stringify(grilla)===JSON.stringify(grillaGanadora)){
+  if (grilla.length !== grillaGanadora.length) {
+    return false;
+  }
+  for (var i=0; i<grilla.length; i++) {
+    if(!grilla[i].every(e => grillaGanadora[i].includes(e))) {
+      return false;
+    }
+  }
   return true;
-}else{
-  console.log(grilla);
-  console.log(grillaGanadora);
-  return false;
-}
-}
+  }
+
 
 // Implementar alguna forma de mostrar un cartel que avise que ganaste el juego
 function mostrarCartelGanador() {
@@ -143,10 +150,54 @@ function moverEnDireccion(direccion) {
     }
 }
 
-//Alerts
+//funcion para que no muestran las flechas mientras mezcla las imagenes
+
+function moverEnDireccionSinFlechas(direccion) {
+  var nuevaFilaPiezaVacia;
+  var nuevaColumnaPiezaVacia;
+
+  // Mueve pieza hacia la abajo, reemplazandola con la blanca
+  if (direccion === codigosDireccion.ABAJO) {
+    nuevaFilaPiezaVacia = filaVacia + 1;
+    nuevaColumnaPiezaVacia = columnaVacia;
+  }
+    
+  // Mueve pieza hacia arriba, reemplazandola con la blanca
+  else if (direccion === codigosDireccion.ARRIBA) {
+    nuevaFilaPiezaVacia = filaVacia - 1;
+    nuevaColumnaPiezaVacia = columnaVacia;
+  }
+    
+  // Mueve pieza hacia la derecha, reemplazandola con la blanca
+  else if (direccion === codigosDireccion.DERECHA) {
+    nuevaFilaPiezaVacia = filaVacia;
+    nuevaColumnaPiezaVacia = columnaVacia+1;
+  }
+    
+  // Mueve pieza hacia la izquierda, reemplazandola con la blanca
+  else if (direccion === codigosDireccion.IZQUIERDA) {
+    nuevaFilaPiezaVacia = filaVacia;
+    nuevaColumnaPiezaVacia = columnaVacia-1;
+  }
+
+  /* A continuación se chequea si la nueva posición es válida, si lo es, se intercambia. 
+  Para que esta parte del código funcione correctamente deberás haber implementado 
+  las funciones posicionValida, intercambiarPosicionesGrilla y actualizarPosicionVacia */
+
+    if (posicionValida(nuevaFilaPiezaVacia, nuevaColumnaPiezaVacia)) {
+        intercambiarPosiciones(filaVacia, columnaVacia, nuevaFilaPiezaVacia, nuevaColumnaPiezaVacia);
+        actualizarPosicionVacia(nuevaFilaPiezaVacia, nuevaColumnaPiezaVacia);
+
+      agregarUltimoMovimiento2(direccion);
+    }
+}
+
+//Alertas
 function alertGanar(){
-  alert("¡felicitaciones!");
+  alert("¡Hurrah! ¡Ganaste el juego! Volve a tocar" + " iniciar" + " para jugar de nuevo.");
 }  
+
+
 //////////////////////////////////////////////////////////
 ////////A CONTINUACIÓN FUNCIONES YA IMPLEMENTADAS.////////
 /////////NO TOCAR A MENOS QUE SEPAS LO QUE HACES//////////
@@ -243,7 +294,9 @@ function mezclarPiezas(veces) {
     ];
 
   var direccion = direcciones[Math.floor(Math.random() * direcciones.length)];
-  moverEnDireccion(direccion);
+
+  //cambié esto para que no se vea las flechas cuando mezcla las piezas 
+  moverEnDireccionSinFlechas(direccion);
 
   setTimeout(function() {
       mezclarPiezas(veces - 1);
@@ -278,16 +331,14 @@ function capturarTeclas() {
 /* Se inicia el rompecabezas mezclando las piezas 60 veces 
 y ejecutando la función para que se capturen las teclas que 
 presiona el usuario */
-
-var button = document.getElementById("button");
-
-button.onclick = iniciar() {
-    mostrarInstrucciones(instrucciones);
-    mezclarPiezas(30);
-    capturarTeclas();
+function iniciar(){
+  mezclarPiezas(30);
+  capturarTeclas();
 }
 
-// Ejecutamos la función iniciar
+//muestra automáticamente las instrucciones. 
+mostrarInstrucciones(instrucciones);
 
-iniciar();
+
+
 
