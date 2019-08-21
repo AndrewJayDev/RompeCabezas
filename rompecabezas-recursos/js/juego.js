@@ -23,10 +23,7 @@ Esta posición comienza siendo la [2, 2]*/
 var filaVacia = 2;
 var columnaVacia = 2;
 
-/* Esta función deberá recorrer el arreglo de instrucciones pasado por parámetro. 
-Cada elemento de este arreglo deberá ser mostrado en la lista con id 'lista-instrucciones'. 
-Para eso deberás usar la función ya implementada mostrarInstruccionEnLista().
-Podés ver su implementación en la ultima parte de este codigo. */
+/* recorre el arreglo de instrucciones pasado por parámetro.  */
 function mostrarInstrucciones(instrucciones) {
   for (i=0; i < instrucciones.length; i++){
     mostrarInstruccionEnLista(instrucciones[i],"lista-instrucciones") ;
@@ -34,9 +31,8 @@ function mostrarInstrucciones(instrucciones) {
 }
 
 
-/* COMPLETAR: Crear función que agregue la última dirección al arreglo de movimientos
-y utilice actualizarUltimoMovimiento para mostrarlo en pantalla */
-//se que tengo que pushear los movimientos del usuario al arreglo "movimientos" pero no se cómo empezar
+/* función que agrega la última dirección al arreglo de movimientos
+y utiliza actualizarUltimoMovimiento para mostrarlo en pantalla */
 function agregarUltimoMovimiento(direccion){
   movimientos.push(direccion);
   actualizarUltimoMovimiento(direccion);
@@ -48,41 +44,28 @@ function agregarUltimoMovimiento2(direccion){
 
 
 
-/* Esta función va a chequear si el Rompecabezas esta en la posicion ganadora. 
-Existen diferentes formas de hacer este chequeo a partir de la grilla. */
-// fuente: https://www.geeksforgeeks.org/how-to-compare-two-arrays-in-javascript/
-function chequearSiGano(grilla,grillaGanadora){
-  if (grilla.length !== grillaGanadora.length) {
-    return false;
-  }
-  for (var i=0; i<grilla.length; i++) {
-    if(!grilla[i].every(e => grillaGanadora[i].includes(e))) {
-      return false;
-    }
-  }
-  return true;
-  }
+/* Esta función va a chequear si el Rompecabezas esta en la posicion ganadora.  */
 
-
-// Implementar alguna forma de mostrar un cartel que avise que ganaste el juego
-function mostrarCartelGanador() {
-    if(chequearSiGano(grilla,grillaGanadora)===true){
-      alertGanar();
-    }else{
-    return false
-    } 
+if (grilla.length !== grillaGanadora.length) {
+  return false;
+}
+for (var i = 0; i < grilla.length; i++) {
+  if (!grilla[i].every(e => grillaGanadora[i].includes(e))) {
+  return false;
+  }
+}
+return true;
 }
 
-/* Función que intercambia dos posiciones en la grilla.
-Pensar como intercambiar dos posiciones en un arreglo de arreglos. 
-Para que tengas en cuenta:
-Si queremos intercambiar las posiciones [1,2] con la [0, 0], si hacemos: 
-arreglo[1][2] = arreglo[0][0];
-arreglo[0][0] = arreglo[1][2];
+function mostrarCartelGanador() {
+if(chequearSiGano()===true){
+  alertGanar();
+} else{
+  return false
+}
+} 
 
-En vez de intercambiar esos valores vamos a terminar teniendo en ambas posiciones el mismo valor.
-Se te ocurre cómo solucionar esto con una variable temporal?
-*/
+/* Función que intercambia dos posiciones en la grilla.*/
 function intercambiarPosicionesGrilla(filaPos1, columnaPos1, filaPos2, columnaPos2) {
   var temp1 = grilla[filaPos1][columnaPos1];
   var temp2 = grilla[filaPos2][columnaPos2];
@@ -101,11 +84,7 @@ function actualizarPosicionVacia(nuevaFila, nuevaColumna) {
 // Para chequear si la posicón está dentro de la grilla.
 
 function posicionValida(fila, columna) {
-    if(fila>=0 && fila<=2 && columna>=0 && columna<=2){
-      return true;
-    }else{
-      return false;
-    }
+  return (fila >= 0 && fila <= 2 && columna >= 0 && columna <= 2)
 }
 
 /* Movimiento de fichas, en este caso la que se mueve es la blanca intercambiando su posición con otro elemento.
@@ -138,9 +117,7 @@ function moverEnDireccion(direccion) {
     nuevaColumnaPiezaVacia = columnaVacia-1;
   }
 
-  /* A continuación se chequea si la nueva posición es válida, si lo es, se intercambia. 
-  Para que esta parte del código funcione correctamente deberás haber implementado 
-  las funciones posicionValida, intercambiarPosicionesGrilla y actualizarPosicionVacia */
+  /* A continuación se chequea si la nueva posición es válida, si lo es, se intercambia.  */
 
     if (posicionValida(nuevaFilaPiezaVacia, nuevaColumnaPiezaVacia)) {
         intercambiarPosiciones(filaVacia, columnaVacia, nuevaFilaPiezaVacia, nuevaColumnaPiezaVacia);
@@ -180,9 +157,7 @@ function moverEnDireccionSinFlechas(direccion) {
     nuevaColumnaPiezaVacia = columnaVacia-1;
   }
 
-  /* A continuación se chequea si la nueva posición es válida, si lo es, se intercambia. 
-  Para que esta parte del código funcione correctamente deberás haber implementado 
-  las funciones posicionValida, intercambiarPosicionesGrilla y actualizarPosicionVacia */
+  /* A continuación se chequea si la nueva posición es válida, si lo es, se intercambia. */
 
     if (posicionValida(nuevaFilaPiezaVacia, nuevaColumnaPiezaVacia)) {
         intercambiarPosiciones(filaVacia, columnaVacia, nuevaFilaPiezaVacia, nuevaColumnaPiezaVacia);
@@ -197,19 +172,7 @@ function alertGanar(){
   alert("¡Hurrah! ¡Ganaste el juego! Volve a tocar" + " iniciar" + " para jugar de nuevo.");
 }  
 
-
-//////////////////////////////////////////////////////////
-////////A CONTINUACIÓN FUNCIONES YA IMPLEMENTADAS.////////
-/////////NO TOCAR A MENOS QUE SEPAS LO QUE HACES//////////
-//////////////////////////////////////////////////////////
-
-/* Las funciones y variables que se encuentran a continuación ya están implementadas.
-No hace falta que entiendas exactamente que es lo que hacen, ya que contienen
-temas aún no vistos. De todas formas, cada una de ellas tiene un comentario
-para que sepas que se está haciendo a grandes rasgos. NO LAS MODIFIQUES a menos que
-entiendas perfectamente lo que estás haciendo! */
-
-/* codigosDireccion es un objeto que te permite reemplazar
+/* codigosDireccion es un objeto que permite reemplazar
 el uso de números confusos en tu código. Para referirte a la dir
 izquierda, en vez de usar el número 37, ahora podés usar:
 codigosDireccion.IZQUIERDA. Esto facilita mucho la lectura del código. */
