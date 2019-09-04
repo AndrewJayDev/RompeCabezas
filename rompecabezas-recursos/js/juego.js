@@ -46,6 +46,7 @@ function agregarUltimoMovimiento2(direccion){
 
 /* Esta función va a chequear si el Rompecabezas esta en la posicion ganadora.  */
 
+function chequearSiGano(){
 if (grilla.length !== grillaGanadora.length) {
   return false;
 }
